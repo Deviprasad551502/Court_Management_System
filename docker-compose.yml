@@ -1,59 +1,59 @@
+version: '3.8'
+
 services:
-  backend:
-    image: node:20-alpine
-    working_dir: /app
-    command: npm run start:dev
-    env_file:
-      - .env
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-    depends_on:
-      db:
-        condition: service_healthy
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      target: dev
-    environment:
-      API_URL: http://localhost:3000
-    ports:
-      - "4200:4200"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    depends_on:
-      - backend
-    restart: unless-stopped
-
-  db:
+  postgres:
     image: postgres:16-alpine
-    env_file:
-      - .env
+    container_name: court-management-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: court_management
+    ports:
+      - '5433:5432'
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d courtdb"]
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: court-management-backend
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin123
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: court_management
+      DB_SCHEMA: court
+      PORT: 3000
+      NODE_ENV: production
+      FRONTEND_URL: http://localhost:4202
     ports:
-      - "8080:80"
+      - '3000:3000'
     depends_on:
-      - db
-    restart: unless-stopped
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
 
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: court-management-frontend
+  #   ports:
+  #     - '4202:4200'
+  #   depends_on:
+  #     - backend
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
 
 volumes:
-  db_data:
+  postgres_data:
