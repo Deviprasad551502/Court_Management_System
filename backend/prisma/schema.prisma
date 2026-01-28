@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["court"]
+}
+
+model CourtType {
+  id         String   @id @default(dbgenerated("court.generate_prefixed_id('COTP')")) @db.VarChar(25)
+  name       String   @unique @db.VarChar(100)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("court_types")
+  @@schema("court")
+}

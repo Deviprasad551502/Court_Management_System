@@ -8,14 +8,23 @@ import { CreateCourtTypeDto } from './dto/create-court-type.dto';
 export class CourtTypesService {
   constructor(
     @InjectRepository(CourtType)
-    private repo: Repository<CourtType>,
+    private readonly repo: Repository<CourtType>,
   ) {}
 
-  create(dto: CreateCourtTypeDto) {
-    return this.repo.save({ name: dto.name });
+  async findAll(): Promise<CourtType[]> {
+    return this.repo.find({ order: { created_at: 'DESC' } });
   }
 
-  findAll() {
-    return this.repo.find();
+  async create(dto: CreateCourtTypeDto): Promise<CourtType> {
+    const [{ id }] = await this.repo.query(
+      `SELECT court.generate_prefixed_id('COTP') AS id`,
+    );
+
+    const courtType = this.repo.create({
+      id,
+      name: dto.name,
+    });
+
+    return this.repo.save(courtType);
   }
 }

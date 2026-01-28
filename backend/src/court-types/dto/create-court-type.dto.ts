@@ -1,17 +1,7 @@
-// src/court-types/dto/create-court-type.dto.ts
-
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsString, Length } from 'class-validator';
 
 export class CreateCourtTypeDto {
   @IsString()
-  @IsNotEmpty()
+  @Length(3, 100)
   name: string;
-
-  @IsOptional()
-  @IsString()
-  description?: string;
-
-  @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
 }
