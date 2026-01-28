@@ -1,0 +1,10 @@
+<div class="relative h-[520px]">
+  <div class="absolute inset-0 dotted-bg"></div>
+
+  <app-pill 
+    *ngFor="let pill of pills"
+    [icon]="pill.icon"
+    [label]="pill.label"
+    [position]="pill.position"
+  ></app-pill>
+</div>

@@ -1,0 +1,105 @@
+<app-section 
+	label="PRODUCTS"
+	heading="UniCourt delivers the litigation data you need, to where you need it."
+	bgVariant="gray"
+	headingMaxWidth="900px"
+	contentMarginBottom="90px"
+>
+	<!-- PRODUCTS GRID -->
+	<div class="grid grid-cols-3 gap-[90px]">
+
+			<!-- PRODUCT 1 -->
+			<app-card variant="default" [revealOnHover]="true">
+				<svg card-icon
+					width="42"
+					height="42"
+					viewBox="0 0 24 24"
+					fill="none"
+				>
+					<path
+						d="M12 2L2 7l10 5 10-5-10-5z"
+						fill="#A5B4FC"
+					/>
+					<path
+						d="M2 17l10 5 10-5"
+						fill="#4338CA"
+					/>
+				</svg>
+
+				<h3 card-title>UniCourt DEEP</h3>
+
+				<p card-description>
+					UniCourt's AI-powered Docket Extraction and Enrichment Pipeline
+					(DEEP) provides programmatic access to litigation data and
+					analytics built from our library of 2 billion dockets and
+					documents in order to enhance your workflows.
+				</p>
+
+				<app-button card-action variant="link">
+					Explore Now
+				</app-button>
+			</app-card>
+
+			<!-- PRODUCT 2 -->
+			<app-card variant="default" [revealOnHover]="true">
+				<svg card-icon
+					width="42"
+					height="42"
+					viewBox="0 0 24 24"
+					fill="none"
+				>
+					<path
+						d="M12 2l6 10-6 10-6-10 6-10z"
+						fill="#86EFAC"
+					/>
+					<path
+						d="M12 6l3 6-3 6-3-6 3-6z"
+						fill="#166534"
+					/>
+				</svg>
+
+				<h3 card-title>UniCourt DART</h3>
+
+				<p card-description>
+					UniCourt's application for Docket Analytics, Research, and
+					Tracking (DART). Our end user-facing application that enables
+					our clients to access powerful legal analytics, advanced docket
+					research, and seamless case tracking.
+				</p>
+
+				<app-button card-action variant="link">
+					Explore Now
+				</app-button>
+			</app-card>
+
+			<!-- PRODUCT 3 -->
+			<app-card variant="default" [revealOnHover]="true">
+				<svg card-icon
+					width="42"
+					height="42"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="#2563EB"
+					stroke-width="2"
+				>
+					<path
+						d="M14 2H10L8 6H4v4l4 2v4l-4 2v4h4l2 4h4l2-4h4v-4l-4-2v-4l4-2V6h-4l-2-4z"
+						stroke-linejoin="round"
+					/>
+				</svg>
+
+				<h3 card-title>Integrations Powered by UniCourt</h3>
+
+				<p card-description>
+					Integrate UniCourt's data into data warehouses or lakes,
+					docketing applications, experience management systems, and
+					more.
+				</p>
+
+				<app-button card-action variant="link">
+					Explore Now
+				</app-button>
+			</app-card>
+
+	</div>
+</app-section>

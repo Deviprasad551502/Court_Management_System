@@ -1,0 +1,8 @@
+<app-dark-section>
+	<div class="grid grid-cols-3 gap-14">
+		<div *ngFor="let item of features" class="space-y-4">
+			<h3 class="font-serif text-[26px] mb-4 text-white">{{ item.title }}</h3>
+			<p class="text-[15px] leading-relaxed text-gray-300">{{ item.desc }}</p>
+		</div>
+	</div>
+</app-dark-section>

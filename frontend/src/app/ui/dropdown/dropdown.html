@@ -1,0 +1,25 @@
+<div
+  class="absolute top-full mt-3 w-[460px] bg-white rounded-xl shadow-xl border border-gray-100 p-4 z-50"
+>
+  <div
+    *ngFor="let item of items"
+    class="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition cursor-pointer"
+  >
+    <!-- ICON -->
+    <div
+      class="w-10 h-10 flex items-center justify-center rounded-md bg-gray-100 text-[20px]"
+    >
+      {{ item.icon }}
+    </div>
+
+    <!-- TEXT -->
+    <div>
+      <p class="text-[15px] font-semibold text-textDark mb-1">
+        {{ item.title }}
+      </p>
+      <p class="text-[13px] leading-[1.6] text-muted">
+        {{ item.description }}
+      </p>
+    </div>
+  </div>
+</div>

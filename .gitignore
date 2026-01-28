@@ -1,0 +1,27 @@
+# Node/Nest/Angular
+node_modules/
+dist/
+coverage/
+
+# Environment
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Prisma
+.prisma/
+
+# Docker artifacts
+*.pid
+
+# Database backups
+/database/backups/*
+!/database/backups/.gitkeep
+
+# Editor
+.idea/
+.vscode/

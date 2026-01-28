@@ -1,0 +1,114 @@
+<header
+  class="fixed top-0 left-0 w-full bg-white border-b border-borderLight z-50"
+>
+  <div class="max-w-[1280px] mx-auto px-8">
+    <div class="flex items-center justify-between h-20">
+
+      <!-- Logo -->
+      <div
+        class="flex items-center gap-2 cursor-pointer"
+        routerLink="/"
+      >
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 6
+               H26
+               C30 6 30 6 30 10
+               V30
+               C30 34 30 34 26 34
+               H10
+               C6 34 6 34 6 30
+               V10
+               C6 6 6 6 10 6"
+            stroke="#2F5BEA"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        <span class="text-[22px] font-semibold text-textDark tracking-tight">
+          UniCourt
+        </span>
+      </div>
+
+      <!-- Navigation -->
+      <nav
+        class="flex items-center gap-8 text-[14px] font-medium tracking-wide text-textDark"
+      >
+        <!-- Solutions -->
+        <div class="relative" #solutionsRef>
+          <button
+            (click)="toggleSolutions()"
+            class="hover:text-green-600 flex items-center gap-1"
+          >
+            Solutions
+            <span>▾</span>
+          </button>
+
+          <app-dropdown
+            *ngIf="showSolutions"
+            [items]="solutionsDropdown"
+          ></app-dropdown>
+        </div>
+
+        <!-- Products -->
+        <div class="relative" #productsRef>
+          <button
+            (click)="toggleProducts()"
+            class="hover:text-green-600 flex items-center gap-1"
+          >
+            Products
+            <span>▾</span>
+          </button>
+
+          <app-dropdown
+            *ngIf="showProducts"
+            [items]="productsDropdown"
+          ></app-dropdown>
+        </div>
+
+        <a
+          routerLink="/coverage"
+          class="hover:text-green-600 cursor-pointer"
+        >
+          Coverage
+        </a>
+
+        <!-- ✅ UPDATED Contact -->
+        <a
+          routerLink="/contact"
+          class="hover:text-green-600 cursor-pointer"
+        >
+          Contact
+        </a>
+      </nav>
+
+      <!-- CTA Buttons -->
+      <div class="flex items-center gap-4">
+        <app-button
+          size="lg"
+          variant="secondary"
+          (clicked)="onLoginClick()"
+        >
+          Log In
+        </app-button>
+
+        <app-button
+          variant="primary"
+          size="lg"
+          (clicked)="onContactClick()"
+        >
+          Contact Us
+        </app-button>
+      </div>
+
+    </div>
+  </div>
+</header>

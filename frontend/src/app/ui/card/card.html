@@ -1,0 +1,30 @@
+<div 
+  [ngClass]="{
+    'bg-[#f3f3f2]': variant === 'light',
+    'bg-transparent': variant === 'default'
+  }"
+  class="rounded-[12px] p-10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+  [class.group]="revealOnHover"
+>
+  <!-- Icon Slot -->
+  <div class="mb-6">
+    <ng-content select="[card-icon]"></ng-content>
+  </div>
+
+  <!-- Title Slot -->
+  <div class="text-[18px] font-semibold text-textDark mb-3">
+    <ng-content select="[card-title]"></ng-content>
+  </div>
+
+  <!-- Description Slot -->
+  <div class="text-[14px] leading-[1.7] text-muted mb-6 max-w-[420px]">
+    <ng-content select="[card-description]"></ng-content>
+  </div>
+
+  <!-- Action Slot (optional) -->
+  <div [ngClass]="revealOnHover 
+                  ? 'mt-4 opacity-0 pointer-events-none translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0' 
+                  : 'mt-4'">
+    <ng-content select="[card-action]"></ng-content>
+  </div>
+</div>

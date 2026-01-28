@@ -1,0 +1,28 @@
+<app-hero-layout>
+	<!-- LEFT CONTENT -->
+	<div>
+		<h1 class="font-serif text-[56px] leading-[1.1] text-textDark">
+			A single platform for accessing litigation data, analytics, and insights.
+		</h1>
+
+		<p class="mt-6 text-[17px] leading-[1.7] text-muted max-w-[460px]">
+			UniCourt delivers the gold standard in litigation data, powering
+			innovation and informed decision-making. Our flexible APIs and data
+			share seamlessly incorporate structured litigation data and analytics
+			into your existing applications, workflows, and data warehouses.
+		</p>
+
+		<div class="mt-10">
+			<app-button
+				variant="primary"
+				size="lg"
+				(clicked)="onGetStartedClick()"
+			>
+				Get Started
+			</app-button>
+		</div>
+	</div>
+
+	<!-- RIGHT VISUAL -->
+	<app-hero-visual [pills]="pills"></app-hero-visual>
+</app-hero-layout>

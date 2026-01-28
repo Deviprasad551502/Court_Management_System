@@ -1,0 +1,11 @@
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: #0a2540;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

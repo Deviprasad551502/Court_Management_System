@@ -1,0 +1,28 @@
+<section 
+  [ngClass]="{
+    'bg-white': bgVariant === 'white',
+    'bg-[#f3f3f2]': bgVariant === 'gray'
+  }"
+  class="py-[120px]"
+>
+  <div class="max-w-[1280px] mx-auto px-8">
+    
+    <!-- SECTION LABEL -->
+    <p class="text-center text-[13px] tracking-[0.18em] text-blue-600 font-medium mb-6">
+      {{ label }}
+    </p>
+
+    <!-- MAIN HEADING -->
+    <h2 
+      class="font-serif text-[44px] leading-[1.2] text-textDark text-center mx-auto"
+      [style.max-width]="headingMaxWidth"
+      [style.margin-bottom]="contentMarginBottom"
+    >
+      {{ heading }}
+    </h2>
+
+    <!-- CONTENT SLOT -->
+    <ng-content></ng-content>
+
+  </div>
+</section>
