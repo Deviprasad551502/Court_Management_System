@@ -10,8 +10,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: process.env.DB_NAME,
   schema: process.env.DB_SCHEMA,
   autoLoadEntities: true,
-  entities: [CourtType],
   synchronize: false,
   migrationsRun: false,
-  migrations: ['dist/migrations/*.js'],
 };
