@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { CourtType } from 'src/entities/court-type.entity';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -9,6 +10,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: process.env.DB_NAME,
   schema: process.env.DB_SCHEMA,
   autoLoadEntities: true,
+  entities: [CourtType],
   synchronize: false,
   migrationsRun: false,
   migrations: ['dist/migrations/*.js'],
