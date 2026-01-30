@@ -1,13 +1,13 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class SeedCourtTypes1769681442936 implements MigrationInterface {
+export class SeedCourtTypes1769682100000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-      INSERT INTO court.court_types (id, name)
+      INSERT INTO court.court_types (name)
       VALUES
-        (generate_id('COTP'), 'District Court'),
-        (generate_id('COTP'), 'High Court'),
-        (generate_id('COTP'), 'Supreme Court')
+        ('District Court'),
+        ('High Court'),
+        ('Supreme Court')
       ON CONFLICT (name) DO NOTHING;
     `);
   }
