@@ -1,4 +1,11 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+} from 'typeorm';
 import { CourtSystem } from './court-system.entity';
 
 @Entity({ name: 'court_types', schema: 'court' })
@@ -11,6 +18,9 @@ export class CourtType {
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updated_at: Date;
 
   @OneToMany(() => CourtSystem, (courtSystem) => courtSystem.courtType)
   courtSystems: CourtSystem[];

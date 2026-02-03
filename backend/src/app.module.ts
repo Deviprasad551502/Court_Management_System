@@ -3,18 +3,25 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
+import { CourtLocationMapModule } from './modules/court-location-map/court-location-map.module';
 import { CourtTypesModule } from './modules/court-types/court-types.module';
+import { StatesModule } from './modules/states/states.module';
 import { CourtSystemsModule } from './modules/court-systems/court-systems.module';
 import { CourtsModule } from './modules/courts/courts.module';
-import { StatesModule } from './modules/states/states.module';
 import { LocationsModule } from './modules/locations/locations.module';
-import { CourtLocationMapModule } from './modules/court-location-map/court-location-map.module';
+import { CoverageModule } from './modules/coverage/coverage.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), CourtTypesModule, CourtSystemsModule,CourtsModule,
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    CourtLocationMapModule,
+    CourtTypesModule,
     StatesModule,
+    CourtSystemsModule,
+    CourtsModule,
     LocationsModule,
-    CourtLocationMapModule,],
+    CoverageModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -56,6 +56,7 @@ export class HeaderComponent {
         this.showProducts = false;
       }
     }
+
   }
 
   // 🔹 Contact button click → ROUTE
@@ -68,6 +69,10 @@ export class HeaderComponent {
   onLoginClick(): void {
     this.closeDropdowns();
     this.router.navigate(['/login']);
+  }
+
+  onNavLinkClick(): void {
+    this.closeDropdowns();
   }
 
   private closeDropdowns(): void {

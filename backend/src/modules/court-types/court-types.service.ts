@@ -1,6 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryFailedError } from 'typeorm';
 
 import { CourtType } from '../../entities/court-type.entity';
 import { CreateCourtTypeDto } from './dto/create-court-type.dto';
@@ -53,6 +54,20 @@ export class CourtTypesService {
   // DELETE
   async remove(id: string): Promise<void> {
     const courtType = await this.findOne(id);
-    await this.courtTypeRepository.remove(courtType);
+
+    try {
+      await this.courtTypeRepository.remove(courtType);
+    } catch (error) {
+      if (
+        error instanceof QueryFailedError &&
+        typeof (error as any).driverError?.code === 'string' &&
+        (error as any).driverError.code === '23503'
+      ) {
+        throw new ConflictException(
+          'Cannot delete this court type because it is referenced by one or more court systems. Delete the dependent court systems first.',
+        );
+      }
+      throw error;
+    }
   }
 }
