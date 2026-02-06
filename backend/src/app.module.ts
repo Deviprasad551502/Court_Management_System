@@ -10,6 +10,9 @@ import { CourtSystemsModule } from './modules/court-systems/court-systems.module
 import { CourtsModule } from './modules/courts/courts.module';
 import { LocationsModule } from './modules/locations/locations.module';
 import { CoverageModule } from './modules/coverage/coverage.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { User } from './entities/auth/user.entity';
+import { Role } from './entities/auth/role.entity';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { CoverageModule } from './modules/coverage/coverage.module';
     CourtsModule,
     LocationsModule,
     CoverageModule,
+    AuthModule,
+    User,
+    Role
   ],
   controllers: [AppController],
   providers: [AppService],

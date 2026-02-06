@@ -12,6 +12,19 @@ export class StatesService {
     private readonly stateRepository: Repository<State>,
   ) {}
 
+  async findAllBasic(): Promise<Pick<State, 'id' | 'state_key' | 'display_name'>[]> {
+    return await this.stateRepository.find({
+      select: {
+        id: true,
+        state_key: true,
+        display_name: true,
+      },
+      order: {
+        display_name: 'ASC',
+      },
+    });
+  }
+
   async create(createStateDto: CreateStateDto): Promise<State> {
     const state = this.stateRepository.create(createStateDto);
     return await this.stateRepository.save(state);

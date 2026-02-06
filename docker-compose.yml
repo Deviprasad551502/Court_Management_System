@@ -28,6 +28,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    environment:
+      JWT_SECRET: supersecretkey123
     # volumes:
     #   - ./backend:/app
     #   - /app/node_modules
@@ -45,6 +47,15 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+  
+
+  admin-portal:
+    build: ./admin-portal
+    ports:
+      - "4000:3000"
+    depends_on:
+      - backend
+
 
 volumes:
   postgres_data:

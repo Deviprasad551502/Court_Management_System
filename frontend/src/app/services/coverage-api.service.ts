@@ -64,7 +64,7 @@ export class CoverageApiService {
    * Get all states (unfiltered)
    */
   getAllStates(): Observable<CoverageState[]> {
-    return this.http.get<CoverageState[]>(`${this.apiUrl}/states/all`);
+    return this.http.get<CoverageState[]>(`${this.apiUrl}/states/getallstates`);
   }
 
   /**
