@@ -26,7 +26,7 @@ export class CourtsController {
   // CREATE - ADMIN ONLY
   @Post()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin')
+  @Roles('Role.USER')
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createCourtDto: CreateCourtDto, @Request() req) {
     console.log(`Court created by admin: ${req.user.email} (ID: ${req.user.id})`);
@@ -35,6 +35,8 @@ export class CourtsController {
 
   // READ - PUBLIC (Anyone can view courts list)
   @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   findAll(@Query('stateKey') stateKey?: string) {
     if (stateKey) {
       return this.courtsService.findByStateKey(stateKey);
