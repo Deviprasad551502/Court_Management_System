@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,11 +12,10 @@ import { CourtsModule } from './modules/courts/courts.module';
 import { LocationsModule } from './modules/locations/locations.module';
 import { CoverageModule } from './modules/coverage/coverage.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { User } from './entities/auth/user.entity';
-import { Role } from './entities/auth/role.entity';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(typeOrmConfig),
     CourtLocationMapModule,
     CourtTypesModule,
@@ -25,8 +25,6 @@ import { Role } from './entities/auth/role.entity';
     LocationsModule,
     CoverageModule,
     AuthModule,
-    User,
-    Role
   ],
   controllers: [AppController],
   providers: [AppService],

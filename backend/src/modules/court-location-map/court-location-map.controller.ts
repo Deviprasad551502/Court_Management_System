@@ -13,7 +13,7 @@ import { CourtLocationMapService } from './court-location-map.service';
 import { CreateCourtLocationMapDto } from './dto/create-court-location-map.dto';
 import { UpdateCourtLocationMapDto } from './dto/update-court-location-map.dto';
 
-@Controller('api/court-location-map')
+@Controller('court-location-map')
 export class CourtLocationMapController {
   constructor(
     private readonly courtLocationMapService: CourtLocationMapService,

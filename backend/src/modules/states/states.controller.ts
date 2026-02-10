@@ -14,7 +14,7 @@ import { StatesService } from './states.service';
 import { CreateStateDto } from './dto/create-state.dto';
 import { UpdateStateDto } from './dto/update-state.dto';
 
-@Controller('api/states')
+@Controller('states')
 export class StatesController {
   constructor(private readonly statesService: StatesService) {}
 

@@ -13,7 +13,7 @@ import { CourtSystemsService } from './court-systems.service';
 import { CreateCourtSystemDto } from './dto/create-court-system.dto';
 import { UpdateCourtSystemDto } from './dto/update-court-system.dto';
 
-@Controller('api/court-systems')
+@Controller('court-systems')
 export class CourtSystemsController {
   constructor(private readonly courtSystemsService: CourtSystemsService) {}
 

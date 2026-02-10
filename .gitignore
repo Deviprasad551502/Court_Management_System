@@ -1,7 +1,7 @@
 # Node/Nest/Angular
 node_modules/
 dist/
-coverage/
+/coverage/
 
 # Environment
 .env

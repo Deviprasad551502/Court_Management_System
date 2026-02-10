@@ -1,0 +1,159 @@
+<div class="flex flex-col h-full bg-gray-50">
+  <!-- Header Section -->
+  <div class="bg-white border-b border-gray-200 px-6 py-4">
+    <h1 class="text-3xl font-bold text-gray-800">Coverage</h1>
+    <p class="text-gray-600 mt-2">Browse court data by state and court type</p>
+
+    <div *ngIf="courtTypesError" class="mt-3 rounded border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
+      {{ courtTypesError }}
+    </div>
+  </div>
+
+  <!-- Tabs: State vs Federal -->
+  <div class="bg-white border-b border-gray-200 px-6 py-3">
+    <div class="inline-flex rounded border border-gray-200 overflow-hidden">
+      <button
+        (click)="setDataset('state')"
+        [class.bg-blue-600]="activeDataset === 'state'"
+        [class.text-white]="activeDataset === 'state'"
+        [class.bg-white]="activeDataset !== 'state'"
+        class="px-4 py-2 text-sm font-semibold"
+      >
+        State Court Data
+      </button>
+      <button
+        (click)="setDataset('federal')"
+        [class.bg-blue-600]="activeDataset === 'federal'"
+        [class.text-white]="activeDataset === 'federal'"
+        [class.bg-white]="activeDataset !== 'federal'"
+        class="px-4 py-2 text-sm font-semibold border-l border-gray-200"
+      >
+        Federal Court Data
+      </button>
+    </div>
+
+    <div class="mt-2 text-xs text-gray-500" *ngIf="activeDataset === 'federal' && selectedCourtType">
+      Active court type: <span class="font-medium text-gray-700">{{ selectedCourtType.name }}</span>
+    </div>
+  </div>
+
+  <!-- Main Content: Two Column Layout -->
+  <div class="flex flex-1 overflow-hidden">
+    <!-- Left Sidebar: Browse by State -->
+    <div class="w-64 bg-white border-r border-gray-200 overflow-y-auto">
+      <div class="sticky top-0 bg-gray-50 border-b border-gray-200 px-4 py-3">
+        <h2 class="text-sm font-bold text-gray-700">Browse by State</h2>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoadingStates" class="p-4">
+        <p class="text-sm text-gray-500">Loading states...</p>
+      </div>
+
+      <!-- States Error -->
+      <div *ngIf="!isLoadingStates && statesError" class="p-4">
+        <p class="text-sm text-red-600">{{ statesError }}</p>
+      </div>
+
+      <!-- States List -->
+      <div *ngIf="!isLoadingStates && states.length > 0" class="divide-y divide-gray-200">
+        <button
+          *ngFor="let state of states"
+          (click)="onStateSelected(state)"
+          [class.bg-blue-50]="selectedState?.id === state.id"
+          [class.border-l-4]="selectedState?.id === state.id"
+          [class.border-blue-600]="selectedState?.id === state.id"
+          [class.text-blue-600]="selectedState?.id === state.id"
+          [class.font-semibold]="selectedState?.id === state.id"
+          class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+        >
+          {{ state.display_name }}
+        </button>
+      </div>
+
+      <!-- No States -->
+      <div *ngIf="!isLoadingStates && !statesError && states.length === 0" class="p-4">
+        <p class="text-sm text-gray-500">No states available for this court type</p>
+      </div>
+    </div>
+
+    <!-- Right Content: Coverage Data -->
+    <div class="flex-1 overflow-y-auto bg-gray-50">
+      <!-- Loading State -->
+      <div *ngIf="isLoadingData" class="p-6">
+        <p class="text-gray-600">Loading coverage data...</p>
+      </div>
+
+      <!-- No Selection -->
+      <div *ngIf="!isLoadingData && !selectedState" class="p-6">
+        <p class="text-gray-600">Select a state to view coverage details</p>
+      </div>
+
+      <!-- Coverage Data -->
+      <div *ngIf="!isLoadingData && selectedState && coverageData" class="p-6">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-gray-800">
+            {{ selectedState.display_name }} {{ selectedCourtType?.name }} Coverage
+          </h2>
+          <div class="flex gap-6 mt-3 text-sm">
+            <div class="text-gray-600">
+              <span class="font-semibold text-gray-800">{{ getTotalCourtsCount() }}</span>
+              Courts
+            </div>
+            <div class="text-gray-600">
+              <span class="font-semibold text-gray-800">{{ getTotalLocationsCount() }}</span>
+              Locations
+            </div>
+          </div>
+        </div>
+
+        <!-- No Data -->
+        <div *ngIf="coverageData.courtSystems.length === 0" class="bg-white rounded-lg p-6">
+          <p class="text-gray-700 font-medium">No courts available yet.</p>
+        </div>
+
+        <!-- Court Systems List -->
+        <div *ngFor="let courtSystem of coverageData.courtSystems" class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-800 mb-4">{{ courtSystem.court_system_name }}</h3>
+
+          <!-- Courts -->
+          <div class="space-y-4">
+            <div *ngFor="let court of courtSystem.courts" class="bg-white rounded-lg shadow-sm overflow-hidden">
+              <div class="p-4 border-l-4 border-blue-500">
+                <h4 class="font-semibold text-gray-800">
+                  <svg
+                    class="w-5 h-5 inline mr-2 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5.951-1.429 5.951 1.429a1 1 0 001.169-1.409l-7-14z"
+                    />
+                  </svg>
+                  {{ court.name }}
+                </h4>
+
+                <!-- Locations -->
+                <div class="mt-3 pl-7 space-y-2">
+                  <div *ngFor="let location of court.locations" class="text-sm text-gray-700">
+                    <div class="font-medium">{{ location.city }}</div>
+                    <div class="text-gray-600">{{ location.street_address_1 }}</div>
+                    <div *ngIf="location.street_address_2" class="text-gray-600">
+                      {{ location.street_address_2 }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoadingData && dataError" class="p-6">
+        <div class="rounded border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
+          {{ dataError }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

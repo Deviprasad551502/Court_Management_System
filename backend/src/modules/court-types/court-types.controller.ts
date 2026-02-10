@@ -13,7 +13,7 @@ import { CourtTypesService } from './court-types.service';
 import { CreateCourtTypeDto } from './dto/create-court-type.dto';
 import { UpdateCourtTypeDto } from './dto/update-court-type.dto';
 
-@Controller('api/court-types')
+@Controller('court-types')
 export class CourtTypesController {
   constructor(private readonly courtTypesService: CourtTypesService) {}
 
